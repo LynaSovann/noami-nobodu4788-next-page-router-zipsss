@@ -1,0 +1,30 @@
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   name: noami-nobodu4788-next-page-router-zipsss-https-ingress
+   namespace: noami-nobodu4788-next-page-router-zipsss
+   annotations:
+     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+     nginx.ingress.kubernetes.io/use-regex: "true"
+     nginx.ingress.kubernetes.io/proxy-body-size: "5g"    
+     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+     nginx.ingress.kubernetes.io/rewrite-target: /
+ spec:
+   ingressClassName: nginx
+   tls:
+     - hosts:
+         - noami-nobodu4788-next-page-router-zipsss.assessify.org
+       secretName: noami-nobodu4788-next-page-router-zipsss-secret-tls
+   rules:
+     - host: noami-nobodu4788-next-page-router-zipsss.assessify.org
+       http:
+         paths:
+           - path: /
+             pathType: Prefix
+             backend:
+               service:
+                 name: noami-nobodu4788-next-page-router-zipsss-service
+                 port:
+                   number: 8255
+ 
